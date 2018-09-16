@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    parallelism: 1
+    working_directory: ~/circleci-test-ruby
+
+    docker:
+      - image: circleci/ruby:2.4.1-node
+
+    working_directory: ~/workspace
+
+    steps:
+      - checkout
+
+      - run:
+          name: Bundle Install
+          command: bundle install --path vendor/bundle
+
+      - run:
+          name: run rspec
+          command: bundle exec rspec
