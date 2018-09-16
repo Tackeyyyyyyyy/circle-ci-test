@@ -1,10 +1,16 @@
 version: 2
+jobs:
+  build:
+    working_directory: ~/circleci-test-ruby
 
-machine:
-  timezone:
-    Asia/Tokyo
-  ruby:
-    version: 2.4.0
-test:
-  post:
-    - bundle exec rspec:
+    # Primary container image where all commands run
+
+    docker:
+      - image: circleci/ruby:2.4.1-node
+
+    steps:
+      - checkout
+
+      - run:
+          name: Parallel RSpec
+          command: bin/rspec
