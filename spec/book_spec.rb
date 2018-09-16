@@ -6,4 +6,5 @@ RSpec.describe Book do
     book = Book.new
     expect(book.name).to eq("test book")
   end
+
 end
