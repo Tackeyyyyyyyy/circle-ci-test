@@ -1,16 +1,29 @@
 version: 2
 jobs:
   build:
+    parallelism: 1
     working_directory: ~/circleci-test-ruby
-
-    # Primary container image where all commands run
 
     docker:
       - image: circleci/ruby:2.4.1-node
 
+    working_directory: ~/workspace
+
     steps:
       - checkout
 
+      # キャッシュを使う
+#      - restore_cache:
+#          keys:
+#            - circleci-test-ruby{{ checksum "Gemfile.lock" }}
+#            - rails-demo-bundle-v2-
+
+
       - run:
-          name: Parallel RSpec
-          command: bin/rspec
+          name: Bundle Install
+          command: bundle install --path vendor/bundle
+
+      - run:
+          name: run rspec
+          command: bundle exec rspec
+          
