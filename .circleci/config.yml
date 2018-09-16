@@ -12,13 +12,6 @@ jobs:
     steps:
       - checkout
 
-      # キャッシュを使う
-#      - restore_cache:
-#          keys:
-#            - circleci-test-ruby{{ checksum "Gemfile.lock" }}
-#            - rails-demo-bundle-v2-
-
-
       - run:
           name: Bundle Install
           command: bundle install --path vendor/bundle
@@ -26,4 +19,3 @@ jobs:
       - run:
           name: run rspec
           command: bundle exec rspec
-          
